@@ -37,9 +37,9 @@ function love.load()
     teslaRotate = 0;
     moonRate = 365/27;
     moonModifier = 0;
-    phobosRate = 365/0.4;
+    phobosRate = 365/10;
     phobosModifier = 0;
-    deimosRate = 365/1.2;
+    deimosRate = 365/23;
     deimosModifier = 0;
 
     showOrbits = false;
@@ -47,7 +47,7 @@ function love.load()
 
     textScale = 1.3
 
-    speedConst = 1;
+    speedConst = .5;
 
     timer = 0;
 
@@ -152,7 +152,8 @@ function love.draw(dt)
     love.graphics.points(stars)
     love.graphics.translate( width/2.5, height/2 )
     drawColor(255, 100, 0)
-    love.graphics.circle("fill", 0, 0, 695508 * sunModifier, 5000)
+    --love.graphics.circle("fill", 0, 0, 695508 * sunModifier, 5000)
+    love.graphics.draw(planetImages.sun, 0,0, 0, 1/10, 1/10, planetImages.sun:getWidth()/2, planetImages.sun:getHeight()/2)
     if(showOrbits) then
         drawColorWithAlpha(255, 100, 100, 60)
         love.graphics.ellipse("line", 11907850 *rOrbit, 0, 57909050 *rOrbit, 56671520.010319114 *rOrbit, 200) --Mercury Orbit
@@ -188,7 +189,7 @@ end
 function createPlanet(xMove, yMove, xPos, yPos, radius, planetSizeModifier, modifierMove, title)
     love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove) + yMove, radius * planetSizeModifier, 5000)
     --love.graphics.draw( drawable, x, y, r, sx, sy, ox, oy, kx, ky )
-    love.graphics.draw(planetImages.sun, 0,0, 0, 1/10, 1/10, planetImages.sun:getWidth()/2, planetImages.sun:getHeight()/2)
+    --love.graphics.draw(planetImages.sun, 0,0, 0, 1/10, 1/10, planetImages.sun:getWidth()/2, planetImages.sun:getHeight()/2)
     if title == "Tesla" then
         print('ga')
 
@@ -198,7 +199,7 @@ function createPlanet(xMove, yMove, xPos, yPos, radius, planetSizeModifier, modi
     else if title == "Venus" then
         love.graphics.draw(planetImages.venus, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), teslaRotate, 1/20, 1/20, planetImages.venus:getWidth()/2, planetImages.venus:getHeight()/2)
     else    
-       love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove), radius * planetSizeModifier, 5000)
+        love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove) + yMove, radius * planetSizeModifier, 5000)
     end
     end
     end
