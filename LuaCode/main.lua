@@ -4,11 +4,12 @@ function love.load()
     width = love.graphics.getWidth( )
     height = love.graphics.getHeight( )
     local maxStars = 200
-    planetImages = {sun = nil, tesla = nil, mercury = nil, venus = nil}
+    planetImages = {sun = nil, tesla = nil, mercury = nil, venus = nil, earth = nil}
     planetImages.sun = love.graphics.newImage('assets/sun.png')
     planetImages.tesla = love.graphics.newImage('assets/teslaCar.png')
     planetImages.mercury = love.graphics.newImage('assets/mercury.png')
     planetImages.venus = love.graphics.newImage('assets/venus.png')
+    planetImages.earth = love.graphics.newImage('assets/earth.png')
     showInstructions = true;
     stars = {}
     for i=1, maxStars do 
@@ -74,7 +75,7 @@ function love.update(dt)
     if teslaSpinRate < 0 then
         teslaRotate = circum * 2
     else
-        teslaRotate = teslaRotate - (2 * (teslaSpinRate * dt)) * speedConst
+        teslaRotate = teslaRotate - (3 * (teslaSpinRate * dt)) * speedConst
     end
 
     if mercuryModifier < 0 then
@@ -174,8 +175,6 @@ function love.draw(dt)
     createPlanet(149597500.0 *rOrbit * math.cos(earthModifier) + 2502500.0 * rOrbit, 149576567.34930107 * rOrbit * math.sin(earthModifier), 384000.0 *rEarthMoonOrbit, 383403.2342064944 *rEarthMoonOrbit, 40000 , rEarthMoonOrbit, moonModifier, "Moon") --Moon
     createPlanet(227950000.0 *rOrbit * math.cos(marsModifier) + 21250000.0 * rOrbit, 226957352.82206655 * rOrbit * math.sin(marsModifier), 9376.0 *rMarsMoonOrbit, 9374.930991938021 * rMarsMoonOrbit, 30000 , rEarthMoonOrbit, phobosModifier, "Moon") --Phobos
     createPlanet(227950000.0 *rOrbit * math.cos(marsModifier) + 21250000.0 * rOrbit, 226957352.82206655 * rOrbit * math.sin(marsModifier), 23463.2 * rMarsMoonOrbit, 23463.198736532067 * rMarsMoonOrbit, 40000 , rEarthMoonOrbit, deimosModifier, "Moon") --Deimos
-    createPlanet(121922264.6205 *rOrbit, 0, 268528177.9065 *rOrbit, 239253722.47802892 *rOrbit, 3390 , rPlanet, teslaModifier, "Phobos") --Phobos
-    createPlanet(121922264.6205 *rOrbit, 0, 268528177.9065 *rOrbit, 239253722.47802892 *rOrbit, 3390 , rPlanet, teslaModifier, "Deimos") --Deimos
 end
 
 function drawColor(r, g, b)
@@ -187,19 +186,20 @@ function drawColorWithAlpha(r, g, b, a)
 end
 
 function createPlanet(xMove, yMove, xPos, yPos, radius, planetSizeModifier, modifierMove, title)
-    love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove) + yMove, radius * planetSizeModifier, 5000)
+    --love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove) + yMove, radius * planetSizeModifier, 5000)
     --love.graphics.draw( drawable, x, y, r, sx, sy, ox, oy, kx, ky )
     --love.graphics.draw(planetImages.sun, 0,0, 0, 1/10, 1/10, planetImages.sun:getWidth()/2, planetImages.sun:getHeight()/2)
     if title == "Tesla" then
-        print('ga')
-
         love.graphics.draw(planetImages.tesla, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), teslaRotate, 1/20, 1/20, planetImages.tesla:getWidth()/2, planetImages.tesla:getHeight()/2)
     else if title == "Mercury" then
-        love.graphics.draw(planetImages.mercury, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), teslaRotate, 1/20, 1/20, planetImages.mercury:getWidth()/2, planetImages.mercury:getHeight()/2)
+        love.graphics.draw(planetImages.mercury, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/50, 1/50, planetImages.mercury:getWidth()/2, planetImages.mercury:getHeight()/2)
     else if title == "Venus" then
-        love.graphics.draw(planetImages.venus, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), teslaRotate, 1/20, 1/20, planetImages.venus:getWidth()/2, planetImages.venus:getHeight()/2)
+        love.graphics.draw(planetImages.venus, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/20, 1/20, planetImages.venus:getWidth()/2, planetImages.venus:getHeight()/2)
+    else if title == "Earth" then
+        love.graphics.draw(planetImages.earth, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/7, 1/7, planetImages.earth:getWidth()/2, planetImages.earth:getHeight()/2)
     else    
         love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove) + yMove, radius * planetSizeModifier, 5000)
+    end
     end
     end
     end
