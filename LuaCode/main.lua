@@ -4,12 +4,14 @@ function love.load()
     width = love.graphics.getWidth( )
     height = love.graphics.getHeight( )
     local maxStars = 200
-    planetImages = {sun = nil, tesla = nil, mercury = nil, venus = nil, earth = nil}
+    planetImages = {sun = nil, tesla = nil, mercury = nil, venus = nil, earth = nil, mars = nil, moon = nil}
     planetImages.sun = love.graphics.newImage('assets/sun.png')
     planetImages.tesla = love.graphics.newImage('assets/teslaCar.png')
     planetImages.mercury = love.graphics.newImage('assets/mercury.png')
     planetImages.venus = love.graphics.newImage('assets/venus.png')
     planetImages.earth = love.graphics.newImage('assets/earth.png')
+    planetImages.mars = love.graphics.newImage('assets/mars.png')
+    planetImages.moon = love.graphics.newImage('assets/moon.png')
     showInstructions = true;
     stars = {}
     for i=1, maxStars do 
@@ -172,9 +174,9 @@ function love.draw(dt)
     createPlanet(2502500.0 *rOrbit, 0, 149597500.0 *rOrbit, 149576567.34930107 *rOrbit, 6371 , rPlanet, earthModifier, "Earth") --Earth Planet
     createPlanet(21250000.0 *rOrbit, 0, 227950000.0 *rOrbit, 226957352.82206655 *rOrbit, 3390 , rPlanet, marsModifier, "Mars") --Mars Planet
     createPlanet(121922264.6205 *rOrbit, 0, 268528177.9065 *rOrbit, 239253722.47802892 *rOrbit, 3390 , rPlanet, teslaModifier, "Tesla")--Tesla Roadster Car
-    createPlanet(149597500.0 *rOrbit * math.cos(earthModifier) + 2502500.0 * rOrbit, 149576567.34930107 * rOrbit * math.sin(earthModifier), 384000.0 *rEarthMoonOrbit, 383403.2342064944 *rEarthMoonOrbit, 40000 , rEarthMoonOrbit, moonModifier, "Moon") --Moon
-    createPlanet(227950000.0 *rOrbit * math.cos(marsModifier) + 21250000.0 * rOrbit, 226957352.82206655 * rOrbit * math.sin(marsModifier), 9376.0 *rMarsMoonOrbit, 9374.930991938021 * rMarsMoonOrbit, 30000 , rEarthMoonOrbit, phobosModifier, "Moon") --Phobos
-    createPlanet(227950000.0 *rOrbit * math.cos(marsModifier) + 21250000.0 * rOrbit, 226957352.82206655 * rOrbit * math.sin(marsModifier), 23463.2 * rMarsMoonOrbit, 23463.198736532067 * rMarsMoonOrbit, 40000 , rEarthMoonOrbit, deimosModifier, "Moon") --Deimos
+    createPlanet(149597500.0 *rOrbit * math.cos(earthModifier) + 2502500.0 * rOrbit, 149576567.34930107 * rOrbit * math.sin(earthModifier), 384000.0 *rEarthMoonOrbit, 383403.2342064944 *rEarthMoonOrbit, 40000 , rEarthMoonOrbit, moonModifier, "MoonM") --Moon
+    createPlanet(227950000.0 *rOrbit * math.cos(marsModifier) + 21250000.0 * rOrbit, 226957352.82206655 * rOrbit * math.sin(marsModifier), 9376.0 *rMarsMoonOrbit, 9374.930991938021 * rMarsMoonOrbit, 30000 , rEarthMoonOrbit, phobosModifier, "MoonP") --Phobos
+    createPlanet(227950000.0 *rOrbit * math.cos(marsModifier) + 21250000.0 * rOrbit, 226957352.82206655 * rOrbit * math.sin(marsModifier), 23463.2 * rMarsMoonOrbit, 23463.198736532067 * rMarsMoonOrbit, 40000 , rEarthMoonOrbit, deimosModifier, "MoonD") --Deimos
 end
 
 function drawColor(r, g, b)
@@ -190,15 +192,27 @@ function createPlanet(xMove, yMove, xPos, yPos, radius, planetSizeModifier, modi
     --love.graphics.draw( drawable, x, y, r, sx, sy, ox, oy, kx, ky )
     --love.graphics.draw(planetImages.sun, 0,0, 0, 1/10, 1/10, planetImages.sun:getWidth()/2, planetImages.sun:getHeight()/2)
     if title == "Tesla" then
-        love.graphics.draw(planetImages.tesla, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), teslaRotate, 1/20, 1/20, planetImages.tesla:getWidth()/2, planetImages.tesla:getHeight()/2)
+        love.graphics.draw(planetImages.tesla, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), teslaRotate, 1/60, 1/60, planetImages.tesla:getWidth()/2, planetImages.tesla:getHeight()/2)
     else if title == "Mercury" then
-        love.graphics.draw(planetImages.mercury, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/50, 1/50, planetImages.mercury:getWidth()/2, planetImages.mercury:getHeight()/2)
+        love.graphics.draw(planetImages.mercury, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/90, 1/90, planetImages.mercury:getWidth()/2, planetImages.mercury:getHeight()/2)
     else if title == "Venus" then
-        love.graphics.draw(planetImages.venus, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/20, 1/20, planetImages.venus:getWidth()/2, planetImages.venus:getHeight()/2)
+        love.graphics.draw(planetImages.venus, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/17, 1/17, planetImages.venus:getWidth()/2, planetImages.venus:getHeight()/2)
     else if title == "Earth" then
-        love.graphics.draw(planetImages.earth, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/7, 1/7, planetImages.earth:getWidth()/2, planetImages.earth:getHeight()/2)
+        love.graphics.draw(planetImages.earth, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/11, 1/11, planetImages.earth:getWidth()/2, planetImages.earth:getHeight()/2)
+    else if title == "Mars" then
+        love.graphics.draw(planetImages.mars, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/40, 1/40, planetImages.mars:getWidth()/2, planetImages.mars:getHeight()/2)
+    else if title == "MoonM" then
+        love.graphics.draw(planetImages.moon, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove) + yMove, 0, 1/20, 1/20, planetImages.moon:getWidth()/2, planetImages.moon:getHeight()/2)
+    else if title == "MoonP" then
+        love.graphics.draw(planetImages.moon, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove) + yMove, 0, 1/40, 1/40, planetImages.moon:getWidth()/2, planetImages.moon:getHeight()/2)
+    else if title == "MoonD" then
+        love.graphics.draw(planetImages.moon, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove) + yMove, 0, 1/30, 1/30, planetImages.moon:getWidth()/2, planetImages.moon:getHeight()/2)
     else    
         love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove) + yMove, radius * planetSizeModifier, 5000)
+    end
+    end
+    end
+    end
     end
     end
     end
