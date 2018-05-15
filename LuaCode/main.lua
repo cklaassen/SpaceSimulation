@@ -1,5 +1,5 @@
 function love.load()
-    love.window.setFullscreen(true)
+    love.window.setFullscreen(false)
     love.mouse.setVisible(false)
     width = love.graphics.getWidth( )
     height = love.graphics.getHeight( )
@@ -193,28 +193,21 @@ function createPlanet(xMove, yMove, xPos, yPos, radius, planetSizeModifier, modi
     --love.graphics.draw(planetImages.sun, 0,0, 0, 1/10, 1/10, planetImages.sun:getWidth()/2, planetImages.sun:getHeight()/2)
     if title == "Tesla" then
         love.graphics.draw(planetImages.tesla, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), teslaRotate, 1/60, 1/60, planetImages.tesla:getWidth()/2, planetImages.tesla:getHeight()/2)
-    else if title == "Mercury" then
+    elseif title == "Mercury" then
         love.graphics.draw(planetImages.mercury, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/90, 1/90, planetImages.mercury:getWidth()/2, planetImages.mercury:getHeight()/2)
-    else if title == "Venus" then
+    elseif title == "Venus" then
         love.graphics.draw(planetImages.venus, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/17, 1/17, planetImages.venus:getWidth()/2, planetImages.venus:getHeight()/2)
-    else if title == "Earth" then
+    elseif title == "Earth" then
         love.graphics.draw(planetImages.earth, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/11, 1/11, planetImages.earth:getWidth()/2, planetImages.earth:getHeight()/2)
-    else if title == "Mars" then
+    elseif title == "Mars" then
         love.graphics.draw(planetImages.mars, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove), 0, 1/40, 1/40, planetImages.mars:getWidth()/2, planetImages.mars:getHeight()/2)
-    else if title == "MoonM" then
+    elseif title == "MoonM" then
         love.graphics.draw(planetImages.moon, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove) + yMove, 0, 1/20, 1/20, planetImages.moon:getWidth()/2, planetImages.moon:getHeight()/2)
-    else if title == "MoonP" then
+    elseif title == "MoonP" then
         love.graphics.draw(planetImages.moon, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove) + yMove, 0, 1/40, 1/40, planetImages.moon:getWidth()/2, planetImages.moon:getHeight()/2)
-    else if title == "MoonD" then
+    elseif title == "MoonD" then
         love.graphics.draw(planetImages.moon, (xPos * math.cos(modifierMove)) + xMove,  yPos * math.sin(modifierMove) + yMove, 0, 1/30, 1/30, planetImages.moon:getWidth()/2, planetImages.moon:getHeight()/2)
-    else    
+    else  
         love.graphics.circle("fill", (xPos * math.cos(modifierMove)) +xMove, yPos * math.sin(modifierMove) + yMove, radius * planetSizeModifier, 5000)
-    end
-    end
-    end
-    end
-    end
-    end
-    end
     end
 end
