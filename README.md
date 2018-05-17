@@ -1,6 +1,6 @@
 # SpaceSimulation
 
-#### Requires Lua and Love to run
+#### Requires Lua and Love2d to run
 
 ##### Go to [this link](https://love2d.org) if you want to download love2d for yourself.  Instructions to use it are online.
 
